@@ -44,27 +44,79 @@ export default function Reports(){
         rejected: "رد شده",
         };
 
-    return (
-        reports && <div className=" flex flex-wrap gap-3 mt-25 flex-col justify-between p-5 w-7/12">
-            {reports.map((report)=>{
-                return <div className="bg-white flex flex-row-reverse justify-around items-center rounded-lg w-full p-3">
-                        <div dir="rtl" className="w-4/12">
-                            <h1 className=" font-bold">{issueTypeLabels[report.issue_type]}</h1>
-                            <p className="text-[#64748B]">{report.message}</p>
+  return (
+    reports && (
+        <div className="w-full sm:w-11/12 md:w-10/12 lg:w-7/12 mt-10 lg:mt-25 p-3 sm:p-5 flex flex-col gap-3">
+
+            {reports.map((report) => {
+                return (
+                    <div
+                        key={report.id}
+                        className="w-full bg-white rounded-lg p-4 sm:p-5 flex flex-col lg:flex-row-reverse gap-5 lg:gap-8 items-stretch lg:items-center justify-between"
+                    >
+
+                        {/* Issue / Message */}
+                        <div
+                            dir="rtl"
+                            className="w-full lg:w-4/12 text-right"
+                        >
+                            <h1 className="font-bold text-base sm:text-lg mb-2">
+                                {issueTypeLabels[report.issue_type]}
+                            </h1>
+
+                            <p className="text-[#64748B] text-sm sm:text-base break-words leading-7">
+                                {report.message}
+                            </p>
                         </div>
-                        <div className=" flex flex-col gap-2 items-center justify-center">
-                            <h1 className="text-[#64748B]">شماره رزرو</h1>
-                            <h3>{report.reservation_id}</h3>
-                            <h1 className="text-[#64748B]">شماره بلیط</h1>
-                            <h3>{report.ticket_id}</h3>
+
+                        {/* Reservation / Ticket */}
+                        <div className="w-full lg:w-auto flex flex-row sm:flex-col gap-4 sm:gap-2 items-center justify-between sm:justify-center text-sm sm:text-base">
+
+                            <div className="text-center">
+                                <h1 className="text-[#64748B] text-xs sm:text-sm">
+                                    شماره رزرو
+                                </h1>
+                                <h3 className="font-bold">
+                                    {report.reservation_id}
+                                </h3>
+                            </div>
+
+                            <div className="text-center">
+                                <h1 className="text-[#64748B] text-xs sm:text-sm">
+                                    شماره بلیط
+                                </h1>
+                                <h3 className="font-bold">
+                                    {report.ticket_id}
+                                </h3>
+                            </div>
+
                         </div>
-                        <div>
-                            <h1 className=" font-bold w-auto">پاسخ پشتیبان</h1>
-                           {report.support_response ?  <p className="text-[#64748B]">{report.support_response}</p> :  <p className="text-[#64748B]">در حال بررسی</p>}
+
+                        {/* Support Response */}
+                        <div
+                            dir="rtl"
+                            className="w-full lg:w-4/12 text-right"
+                        >
+                            <h1 className="font-bold mb-2">
+                                پاسخ پشتیبان
+                            </h1>
+
+                            {report.support_response ? (
+                                <p className="text-[#64748B] text-sm sm:text-base leading-7 break-words">
+                                    {report.support_response}
+                                </p>
+                            ) : (
+                                <p className="text-[#64748B] text-sm sm:text-base">
+                                    در حال بررسی
+                                </p>
+                            )}
                         </div>
 
                     </div>
+                )
             })}
+
         </div>
     )
+)
 }

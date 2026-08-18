@@ -126,40 +126,66 @@ export default function Reserves (){
         console.log(res)
     }
 
-    return (
-        // (mockReservations || books || cacels) && (data.length === 0 && books.length === 0 && cacels.length === 0 ? <p>رزرو فعالی ندارید</p> :
-         <div className="flex flex-wrap gap-3 mt-25 flex-col justify-between p-5 w-7/12">
-             { modal && <CheckoutModal closeModal={closeModal} id={id}/>}
-             { cancelModal && info && <CancelModal info={info} closeModal={closeCancelModal} />}
-            {
-                mockReservations.map((ticket)=>{
-                    if(ticket.status=="paid"){
-                        return <ReserveCardPaied  key={ticket.reservation_id}  total_amount={ticket.total_amount} seats={ticket.seats} away_team_name={ticket.away_team_name} 
-                        home_team_name={ticket.home_team_name} venue_name={ticket.venue_name} city_name={ticket.city_name}  event_datetime={ticket.event_datetime} paid_at={ticket.paid_at} reservation_id={ticket.reservation_id} />
-                    } else if (ticket.status=="pending"){
-                        return <ReserveCardUnPaied ticket_id={ticket.ticket_id} payHandler={payHandler} key={ticket.reservation_id} total_amount={ticket.total_amount} seats={ticket.seats} away_team_name={ticket.away_team_name} 
-                        home_team_name={ticket.home_team_name} venue_name={ticket.venue_name} city_name={ticket.city_name}  event_datetime={ticket.event_datetime} remaining_seconds={ticket.remaining_seconds} reserved_at={ticket.reserved_at} reservation_id={ticket.reservation_id} />
-                    } 
-                })
+  return (
+    <div className="w-full sm:w-11/12 md:w-10/12 lg:w-7/12 mt-10 lg:mt-25 p-3 sm:p-5 flex flex-col gap-3">
 
-               
-            // }{
-            //      books.map((ticket)=>{
-                    
-            //             return <ReserveCardPaied refundHandler={()=>{refundHandler(ticket.ticket_id)}} ticket_id={ticket.ticket_id} key={ticket.reservation_id}  total_amount={ticket.total_amount} seats={ticket.seats} away_team_name={ticket.away_team_name} 
-            //             home_team_name={ticket.home_team_name} venue_name={ticket.venue_name} city_name={ticket.city_name}  event_datetime={ticket.event_datetime} paid_at={ticket.paid_at} reservation_id={ticket.reservation_id} />
-                      
-            //     })
-            // }
-            // {
-            //      cacels.map((ticket)=>{
-                    
-            //             return <ReserveCardCancelled  ticket_id={ticket.ticket_id} key={ticket.reservation_id}  total_amount={ticket.total_amount} seats={ticket.seats} away_team_name={ticket.away_team_name} 
-            //             home_team_name={ticket.home_team_name} venue_name={ticket.venue_name} city_name={ticket.city_name}  event_datetime={ticket.event_datetime} paid_at={ticket.paid_at} reservation_id={ticket.reservation_id} />
-                      
-            //     })
-            // }
-}
-        </div>)
+        {modal && (
+            <CheckoutModal
+                closeModal={closeModal}
+                id={id}
+            />
+        )}
+
+        {cancelModal && info && (
+            <CancelModal
+                info={info}
+                closeModal={closeCancelModal}
+            />
+        )}
+
+        {mockReservations.map((ticket) => {
+
+            if (ticket.status === "paid") {
+                return (
+                    <ReserveCardPaied
+                        key={ticket.reservation_id}
+                        total_amount={ticket.total_amount}
+                        seats={ticket.seats}
+                        away_team_name={ticket.away_team_name}
+                        home_team_name={ticket.home_team_name}
+                        venue_name={ticket.venue_name}
+                        city_name={ticket.city_name}
+                        event_datetime={ticket.event_datetime}
+                        paid_at={ticket.paid_at}
+                        reservation_id={ticket.reservation_id}
+                    />
+                )
+            }
+
+            if (ticket.status === "pending") {
+                return (
+                    <ReserveCardUnPaied
+                        key={ticket.reservation_id}
+                        ticket_id={ticket.ticket_id}
+                        payHandler={payHandler}
+                        total_amount={ticket.total_amount}
+                        seats={ticket.seats}
+                        away_team_name={ticket.away_team_name}
+                        home_team_name={ticket.home_team_name}
+                        venue_name={ticket.venue_name}
+                        city_name={ticket.city_name}
+                        event_datetime={ticket.event_datetime}
+                        remaining_seconds={ticket.remaining_seconds}
+                        reserved_at={ticket.reserved_at}
+                        reservation_id={ticket.reservation_id}
+                    />
+                )
+            }
+
+            return null
+        })}
+
+    </div>
+)
     
 }

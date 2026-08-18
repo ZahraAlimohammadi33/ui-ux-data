@@ -41,13 +41,31 @@ export default function SendPage(){
             }
     }
 
-    return(
-        <div className="shadow-2xl bg-white rounded-xl flex flex-col gap-5 items-end justify-between flex-wrap mt-25 p-5 w-7/12">
-            <h1 className=" w-fit border-b-2 p-1 mb-5"> ثبت گزارش جدید</h1>
-            <div className="flex flex-row-reverse flex-wrap gap-5 justify-between items-center">
-                <input ref={ticketRef} className="p-1  border-b-2"  placeholder="شماره بلیط"></input>
-            <input className=" p-1 border-b-2 w-auto" ref={reserveRef}  placeholder="کد رزرو"></input>
-            <select ref={issueRef}>
+   return (
+    <div className="w-full sm:w-11/12 md:w-10/12 lg:w-7/12 mt-10 lg:mt-25 p-4 sm:p-5 bg-white rounded-xl shadow-2xl flex flex-col gap-5 items-stretch lg:items-end">
+
+        <h1 className="w-fit self-end border-b-2 p-1 mb-2 sm:mb-5 text-base sm:text-lg">
+            ثبت گزارش جدید
+        </h1>
+
+        <div className="w-full flex flex-col sm:flex-row-reverse flex-wrap gap-4 sm:gap-5 justify-between items-stretch sm:items-center">
+
+            <input
+                ref={ticketRef}
+                className="w-full sm:flex-1 p-2 border-b-2 outline-none"
+                placeholder="شماره بلیط"
+            />
+
+            <input
+                ref={reserveRef}
+                className="w-full sm:flex-1 p-2 border-b-2 outline-none"
+                placeholder="کد رزرو"
+            />
+
+            <select
+                ref={issueRef}
+                className="w-full sm:flex-1 p-2 border-b-2 bg-white outline-none"
+            >
                 <option value={"purchase_problem"}>مشکل خرید</option>
                 <option value={"payment_problem"}>مشکل پرداخت</option>
                 <option value={"ticket_information"}>اطلاعات بلیط</option>
@@ -58,10 +76,23 @@ export default function SendPage(){
                 <option value={"unexpected_cancellation"}>لغو غیرمنتطره</option>
                 <option value={"other"}>سایر</option>
             </select>
-            
-            </div>
-            <input className=" p-1 border-2 rounded-xl h-30 w-10/12" type="text" ref={messageRef}  placeholder="توضیحات"></input>
-            <button className="bg-[#10243D] text-white p-3 rounded-xl" onClick={sendReport}>ثبت گزارش</button>
+
         </div>
-    )
+
+        <input
+            type="text"
+            ref={messageRef}
+            className="w-full p-3 border-2 rounded-xl h-32 sm:h-36 resize-none outline-none"
+            placeholder="توضیحات"
+        />
+
+        <button
+            className="w-full sm:w-auto self-stretch sm:self-end bg-[#10243D] text-white p-3 px-6 rounded-xl hover:opacity-90 transition"
+            onClick={sendReport}
+        >
+            ثبت گزارش
+        </button>
+
+    </div>
+)
 }
